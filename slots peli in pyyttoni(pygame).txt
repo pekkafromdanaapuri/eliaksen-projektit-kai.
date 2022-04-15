@@ -1,0 +1,108 @@
+import pygame
+import random
+
+
+run = True
+while run:
+
+ class IconLocation(pygame.sprite.Sprite):
+     def __int__(self, pos_x, pos_y):
+         super().__init__()
+         self.image = pygame.image.load("Assets/"+icon+".png")
+         self.rect = self.image.get_rect()
+         self.rect.x = pos_x
+         self.rect.y = pos_y
+     def set_image(self, image):
+        self.image = image
+
+def start():
+    global total_coins
+
+    rand_icons = numpy.random.choice(icons, 3, p=icons_proba)
+    loc_left.set_image(icon_dict[rand_icons[0]])
+    loc_middle.set_image(icon_dict[rand_icons[1]])
+    loc_right.set_image(icon_dict[rand_icons[2]])
+
+if rand_icons[0] == rand_icons[1] == rand_icons[2]:
+    coins = icon_reward_dict[rand_icons[0]]
+    total_coins += coins
+
+
+pygame.init()
+width = 700
+height = 550
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Slots masiina peli")
+screen.fill(white)
+
+
+
+height.location = height / 2 - 13
+location = pygame.sprite.Group()
+loc_left = IconLocation(102, height_location, "joe-chef")
+loc_middle = IconLocation(192, height_location, "joe-woah")
+loc_right = IconLocation(282, height_location, "joe-fight")
+
+Location.add(loc_left)
+Location.add(loc_middle)
+Location.add(loc_right)
+
+Location_menu = pygame.sprite.Group()
+first_loc = IconLocation(480, 200, "joe-chef")
+second_loc = IconLocation(480, 260, "joe-woah")
+third_loc = IconLocation(480, 330, "joe-fight")
+
+Location_menu.add(first_loc)
+Location_menu.add(second_loc)
+Location_menu.add(third_loc)
+
+
+background = pygame.image.load('Assets/slots-masiina.png')
+police_total_coins = pygame.font.SysFont("Comic Sans MS", 50)
+police_menu = pygame.font.SysFont("Comic Sans MS", 25)
+
+total_coins = 500
+
+icons = ["joe-chef", "joe-woah", "joe-fight"]
+icons_proba = [0.3, 0.35, 0.2]
+
+icon_reward_dict = {
+    "joe-chef": 30,
+    "joe-woah": 25,
+    "joe-fight": 100,
+}
+icon_dict = {
+    "joe-chef": pygame.image.load("Assets/joe-chef.png"),
+    "joe-woah": pygame.image.load("Assets/joe-woah.png"),
+    "joe-fight": pygame.image.load("Assets/joe-fight.png")
+}
+
+
+def main():
+    while run:
+
+        screen.fill(white)
+        screen.blit(background, (0, 0))
+        Location.draw(screen)
+        text = police_total_coins.render("Total"+str(total_coins)+"$", True, (0, 0, 0))
+        screen.blit(text, (400, 0))
+        joe1_menu = police_menu.render("X3 +200$", True, (0, 0, 0))
+        screen.blit(yt_menu,(550, 215))
+        joe2_menu = police_menu.render("X3 +200$", True, (0, 0, 0))
+        screen.blit(yt_menu, (550, 275))
+        joe3_menu = police_menu.render("X3 +200$", True, (0, 0, 0))
+        screen.blit(yt_menu, (550, 345))
+
+
+
+        Location_menu.draw(screen)
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                quit()
+
+        if event.type == pygame.KEYDOWN:
+            if total_coins >= 15:
+                total_coins -= 15
+                start()
