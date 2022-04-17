@@ -1,0 +1,18 @@
+import random
+#x =-1049, y = 64(vasen näyttö
+#oikea näyttö x=776 y=57
+#oikea näyttö whatsapp 767, 1008
+# play nappi asia = x=1475 y=65
+import pyautogui
+#print(pyautogui.position())
+while True:
+    a = "http://shorturl.at/aoADZ"
+    b = "printtaa"
+    pyautogui.click(767, 1008)
+    pyautogui.typewrite(a)
+    pyautogui.typewrite(["enter"])
+    if True:
+        print(b)
+    #ylimäärästä.
+    else:
+        print("eipä printtaa")
